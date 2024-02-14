@@ -3,6 +3,7 @@ import DeleteIcon from "../icons/deleteIcon"
 import { CSS } from "@dnd-kit/utilities"
 import { useMemo, useState } from "react"
 import Task from "./task"
+import AddIcon from "../icons/addIcon"
 
 function Container({
   column,
@@ -148,11 +149,27 @@ function Container({
       </div>
       {/* Column footer */}
       <button
-    className="items-center rounded-xl p-4 hover:bg-green-500 hover:text-black-500 active:bg-green-600"
+    className="
+    h-[60px]
+    w-[350px]
+    min-w-[350px]
+    cursor-pointer
+    rounded-xl
+    bg-mainBackgroundColor
+    p-4
+    ring-black-500
+    hover:bg-green-500
+    flex
+    gap-2
+    "
     onClick={() => {
       createTask(column.id)
     }}
->Add new todo</button>
+>
+  Add new todo 
+<AddIcon />
+</button>
+
     </div>
   )
 }

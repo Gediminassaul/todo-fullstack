@@ -106,17 +106,15 @@ function Board() {
       cursor-pointer
       rounded-xl
       bg-mainBackgroundColor
-      border-2
-      border-columnBackgroundColor
       p-4
       ring-black-500
-      hover:ring-2
+      hover:bg-green-500
       flex
       gap-2
       "
           >
-            <AddIcon />
-            Add Column
+            Add Card 
+          <AddIcon />
           </button>
         </div>
 
