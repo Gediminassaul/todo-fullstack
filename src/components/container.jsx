@@ -2,7 +2,6 @@ import { SortableContext, useSortable } from "@dnd-kit/sortable"
 import DeleteIcon from "../icons/deleteIcon"
 import { CSS } from "@dnd-kit/utilities"
 import { useMemo, useState } from "react"
-import AddIcon from "../icons/addIcon"
 import Task from "./task"
 
 function Container({
@@ -54,7 +53,7 @@ function Container({
       w-[350px]
       h-[500px]
       max-h-[500px]
-      rounded-md
+      rounded-xl
       flex
       flex-col
       "
@@ -71,7 +70,7 @@ function Container({
   w-[350px]
   h-[500px]
   max-h-[500px]
-  rounded-md
+  rounded-xl
   flex
   flex-col
   "
@@ -88,7 +87,7 @@ function Container({
       text-md
       h-[60px]
       cursor-grab
-      rounded-md
+      rounded-xl
       rounded-b-none
       p-3
       font-bold
@@ -136,12 +135,12 @@ function Container({
             deleteColumn(column.id)
           }}
           className="
-        stroke-gray-500
+        stroke-red-500
         hover:stroke-white
         hover:bg-columnBackgroundColor
         rounded
-        px-1
-        py-2
+        px-4
+        py-4
         "
         >
           <DeleteIcon />
@@ -163,14 +162,11 @@ function Container({
       </div>
       {/* Column footer */}
       <button
-        className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-md p-4 border-x-columnBackgroundColor hover:bg-mainBackgroundColor hover:text-black-500 active:bg-black"
-        onClick={() => {
-          createTask(column.id)
-        }}
-      >
-        
-        Add new todo<AddIcon />
-      </button>
+    className="items-center rounded-xl p-4 hover:bg-green-500 hover:text-black-500 active:bg-green-600"
+    onClick={() => {
+      createTask(column.id)
+    }}
+>Add new todo</button>
     </div>
   )
 }
