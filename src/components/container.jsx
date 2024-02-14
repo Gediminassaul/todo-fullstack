@@ -99,24 +99,10 @@ function Container({
       "
       >
         <div className="flex gap-2">
-          <div
-            className="
-        flex
-        justify-center
-        items-center
-        bg-columnBackgroundColor
-        px-2
-        py-1
-        text-sm
-        rounded-full
-        "
-          >
-            0
-          </div>
           {!editMode && column.title}
           {editMode && (
             <input
-              className="bg-white focus:border-grey-500 border rounded outline-none px-1"
+              className="bg-black focus:border-grey-500 border rounded outline-none px-1"
               value={column.title}
               onChange={e => updateColumn(column.id, e.target.value)}
               autoFocus

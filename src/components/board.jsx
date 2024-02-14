@@ -104,7 +104,7 @@ function Board() {
       w-[350px]
       min-w-[350px]
       cursor-pointer
-      rounded-lg
+      rounded-xl
       bg-mainBackgroundColor
       border-2
       border-columnBackgroundColor
