@@ -18,7 +18,7 @@
       "function": {
         "todoAPIFunc": {
           "deploymentBucketName": "amplify-amplify6842a3c23f9f4-staging-110630-deployment",
-          "s3Key": "amplify-builds/todoAPIFunc-58687156515a386b4f77-build.zip"
+          "s3Key": "amplify-builds/todoAPIFunc-6132584d664662593652-build.zip"
         }
       },
       "api": {
