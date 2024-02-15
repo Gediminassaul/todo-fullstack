@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import '@aws-amplify/ui-react/styles.css';
 import { withAuthenticator, View } from '@aws-amplify/ui-react';
 import Board from "./components/board";
-import { fetchAuthSession } from '@aws-amplify/auth';
+import { getCurrentUser } from '@aws-amplify/auth';
 import './App.css';
 
-function App({ signOut }) {
-  const [sessionDetails, setSessionDetails] = useState({});
+function Header({ signOut }) {
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     async function getSessionDetails() {
       try {
-        const sessionData = await fetchAuthSession();
+        const sessionData = await getCurrentUser();
         console.log(sessionData);
-        console.log(sessionData.userSub);
-        setSessionDetails({ sub: sessionData.userSub });
+        setUserDetails({ username: sessionData?.username });
       } catch (error) {
         console.error('Error getting session details', error);
       }
@@ -22,21 +21,26 @@ function App({ signOut }) {
 
     getSessionDetails();
   }, []);
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: 0, right: 0, padding: '1rem' }}>
+      {userDetails.username && (
+        <div style={{ marginRight: '1rem', fontWeight: 'bold', fontSize: '1.2rem' }}>
+          {userDetails.username}
+        </div>
+      )}
+      <button onClick={signOut} className="Btn" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="text" style={{ fontSize: '1rem', fontWeight: 'bold', color:'#FF6347' }}>Sign Out</div>
+      </button>
+    </div>
+  );
+}
+
+function App({ signOut }) {
 
   return (
     <View className="App">
-      <div>
-      <div style={{ position: 'absolute', top:   0, right:   0, padding: '1rem' }}>
-        {sessionDetails.sub && (
-          <span>Sub: {sessionDetails.sub}</span>
-        )}
-        <button onClick={signOut} className="Btn">
-        <div className="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
-        <div className="text">Logout</div>
-        </button>
-      </div>
+      <Header signOut={signOut} />
       <Board />
-      </div>
     </View>
   );
 }

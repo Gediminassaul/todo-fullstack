@@ -96,26 +96,16 @@ function Board() {
             </SortableContext>
           </div>
           <button
-            onClick={() => {
-              createNewColumn()
-            }}
-            className="
+      onClick={() => {
+        createNewColumn()
+      }} className="flex
+      gap-2"> 
+          <AddIcon className="
       h-[60px]
-      w-[350px]
-      min-w-[350px]
+      w-[60px]
       cursor-pointer
-      rounded-xl
-      bg-mainBackgroundColor
-      p-4
-      ring-black-500
-      hover:bg-green-500
-      flex
-      gap-2
-      "
-          >
-            Add Card 
-          <AddIcon />
-          </button>
+      hover:text-green-500
+      "/></button> 
         </div>
 
         {createPortal(

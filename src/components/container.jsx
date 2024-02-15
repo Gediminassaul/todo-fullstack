@@ -70,6 +70,7 @@ function Container({
   bg-columnBackgroundColor
   w-[350px]
   h-[500px]
+  text-white
   max-h-[500px]
   rounded-xl
   flex
@@ -155,6 +156,7 @@ function Container({
     min-w-[350px]
     cursor-pointer
     rounded-xl
+    text-white
     bg-mainBackgroundColor
     p-4
     ring-black-500

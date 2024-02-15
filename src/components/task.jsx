@@ -82,7 +82,7 @@ function Task({ task, deleteTask, updateTask }) {
       {...attributes}
       {...listeners}
       onClick={toggleEditMode}
-      className="bg-mainBackgroundColor p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-black-500 cursor-grab relative task"
+      className="bg-mainBackgroundColor p-2.5 h-[100px] min-h-[100px] items-center flex text-left rounded-xl hover:ring-2 hover:ring-inset hover:ring-black-500 cursor-grab text-white relative task"
       onMouseEnter={() => {
         setMouseIsOver(true)
       }}
