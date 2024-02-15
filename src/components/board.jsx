@@ -12,38 +12,22 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable"
 import { createPortal } from "react-dom"
 import Task from "./task"
 
-const defaultCols = [
-  {
-    id: "todo",
-    title: "Todo"
-  },
-  {
-    id: "doing",
-    title: "Work in progress"
-  },
-  {
-    id: "done",
-    title: "Done"
-  }
-]
-
 const defaultTasks = [
   {
-    id: "1",
-    columnId: "todo",
+    id: 1,
+    columnId: 1,
     content: "List admin APIs for dashboard"
   },
   {
-    id: "2",
-    columnId: "todo",
+    id: 2,
+    columnId: 1,
     content:
       "Develop user registration functionality with OTP delivered on SMS after email confirmation and phone number confirmation"
   }
 ]
 
-function Board() {
-  const [columns, setColumns] = useState(defaultCols)
-  const columnsId = useMemo(() => columns.map(col => col.id), [columns])
+function Board({cards, setCards}) {
+  const columnsId = useMemo(() => cards.map(col => col.id), [cards])
 
   const [tasks, setTasks] = useState(defaultTasks)
 
@@ -81,7 +65,7 @@ function Board() {
         <div className="m-auto flex gap-4">
           <div className="flex gap-4">
             <SortableContext items={columnsId}>
-              {columns.map(col => (
+              {cards.map(col => (
                 <Container
                   key={col.id}
                   column={col}
@@ -134,10 +118,13 @@ function Board() {
       </DndContext>
     </div>
   )
-
+  function getNewCardId() {
+    const ids = cards.map(obj => obj.id);
+    return ids.length ? Math.max(...ids) + 1: 0
+  }
   function createTask(columnId) {
     const newTask = {
-      id: generateId(),
+      id: getNewCardId(),
       columnId,
       content: `Task ${tasks.length + 1}`
     }
@@ -161,28 +148,28 @@ function Board() {
 
   function createNewColumn() {
     const columnToAdd = {
-      id: generateId(),
-      title: `Column ${columns.length + 1}`
+      id: getNewCardId(),
+      title: `Column ${getNewCardId()}`
     }
 
-    setColumns([...columns, columnToAdd])
+    setCards([...cards, columnToAdd])
   }
 
   function deleteColumn(id) {
-    const filteredColumns = columns.filter(col => col.id !== id)
-    setColumns(filteredColumns)
+    const filteredColumns = cards.filter(col => col.id !== id)
+    setCards(filteredColumns)
 
     const newTasks = tasks.filter(t => t.columnId !== id)
     setTasks(newTasks)
   }
 
   function updateColumn(id, title) {
-    const newColumns = columns.map(col => {
+    const newColumns = cards.map(col => {
       if (col.id !== id) return col
       return { ...col, title }
     })
 
-    setColumns(newColumns)
+    setCards(newColumns)
   }
 
   function onDragStart(event) {
@@ -214,7 +201,7 @@ function Board() {
 
     console.log("DRAG END")
 
-    setColumns(columns => {
+    setCards(columns => {
       const activeColumnIndex = columns.findIndex(col => col.id === activeId)
 
       const overColumnIndex = columns.findIndex(col => col.id === overId)
@@ -266,11 +253,6 @@ function Board() {
       })
     }
   }
-}
-
-function generateId() {
-  /* Generate a random number between 0 and 10000 */
-  return Math.floor(Math.random() * 10001)
 }
 
 export default Board

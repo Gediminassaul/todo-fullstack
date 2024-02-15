@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/cards": {
+      "name": "/cards",
+      "lambdaFunction": "todoAPIFunc",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
